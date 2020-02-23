@@ -1,0 +1,39 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+
+    <article>
+        <h1 style="text-align: center">Kathy c'est le king </h1>
+
+        <h2>{{ article.title }}</h2>
+        <div class="metadata">Ecrit le {{ article.createdAt | date('d/m/y') }}
+            à {{ article.createdAt | date('H:i') }} dans la Catégorie {{ article.category.title }}
+        </div>
+        <div class="content">
+            <img src="{{ article.image }}" alt="">
+            {{ article.content | raw }}
+        </div>
+
+        <hr>
+        <section id="commentaires">
+            {% for comment in article.comments %}
+                <div class="comment">
+                    <div class="row">
+                        <div class="col-3">
+                            {{ comment.author }} <br>
+                            <small> ({{ comment.createdAt | date ('d/m/Y à H:i') }})</small>
+                        </div>
+                        <div class="col">
+                            {{ comment.content | raw }}
+                        </div>
+                    </div>
+                </div>
+            {% endfor %}
+        </section>
+
+        <br>
+        <a href="{{ path('blog') }}" class="btn btn-secondary" style="float:right">Retour</a>
+
+    </article>
+
+{% endblock %}

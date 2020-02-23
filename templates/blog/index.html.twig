@@ -1,0 +1,35 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Liste des artciles{% endblock %}
+
+{% block body %}
+    <br>
+    <section class="articles">
+        {% for article in articles %}
+            <article>
+                <h2>{{ article.title }}</h2>
+                <div class="metadata">Ecrit le {{ article.createdAt | date('d/m/y') }}
+                    à {{ article.createdAt | date('H:i') }} dans la catégorie Divers
+                </div>
+                <div class="content">
+                    <img src="{{ article.image }}" alt="" style="width: 50%">
+                    {{ article.content | raw }}
+                    <a href="{{ path('blog_show', {'id': article.id}) }}" class="btn btn-primary">Lire la suite</a>
+                    <a href="{{ path('blog_edit', {'id': article.id}) }}">
+                        <button class="btn btn-outline-info" style="float: right;">Edit</button>
+                    </a>
+                    <br>
+                    <a href="{{ path('delete_article', {'id': article.id}) }}"><br>
+                        <i class="far fa-trash-alt">
+                            <span>Detelete artcile {{ article.title }}</span>
+                        </i>
+                    </a>
+                </div>
+            </article>
+            <hr>
+        {% endfor %}
+        <br>
+       <div style="margin-right: 50%; margin-left: 50%">{{ knp_pagination_render(articles) }}</div>
+    </section>
+
+{% endblock %}

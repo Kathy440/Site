@@ -1,0 +1,53 @@
+{% extends 'base.html.twig' %}
+{% form_theme formArticle 'bootstrap_4_layout.html.twig' %}
+
+{% block body %}
+    <br>
+    <h1>
+        {% if editMode %}
+            Modification de l'article !
+        {% else %}
+            Création d'un artcile
+        {% endif %}
+    </h1>
+
+    {{ form_start(formArticle) }}
+
+    {{ form_row(formArticle.title, {'attr': {'placeholder': "Titre de l'article"}}) }}
+    {{ form_row(formArticle.category) }}
+    {{ form_row(formArticle.content, {'attr': {'placeholder': "Contenu de l'article"}}) }}
+    {{ form_row(formArticle.image, {'attr': {'placeholder': "URL de l'image"}}) }}
+
+    {#<div class="form-group">
+        <label for="">Titre</label>
+        {{ form_widget(formArtcile.title) }}
+    </div>
+
+    <div class="form-group">
+        <label for=" ">Contenu</label>
+        {{ form_widget(formArtcile.content) }}
+    </div>
+
+    <div class="form-group">
+        <label for=" ">Contenu</label>
+        {{ form_widget(formArtcile.image) }}
+    </div>#}
+
+    <button type="submit" class="btn btn-success">
+        {% if editMode %}
+            Enregistrer les modifications
+        {% else %}
+            Ajouter l'article
+        {% endif %}
+    </button>
+
+
+    <a href="{{ path('blog') }}" style="float:right">
+        <button type="button" class="btn btn-outline-info">Retour</button>
+    </a>
+
+
+
+    {{ form_end(formArticle) }}
+
+{% endblock %}
